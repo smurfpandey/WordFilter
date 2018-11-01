@@ -1,19 +1,26 @@
 ﻿using Newtonsoft.Json;
-using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
+using System.Reflection;
 
 namespace WordFilterNS
 {
     public class WordFilter
     {
         private List<string> lstBadWords = new List<string>();
+        private readonly string BADWORDS_FILE_NAME = "badwords.json";
 
         public WordFilter()
         {
-            string badWords = File.ReadAllText("badwords.json");
-            lstBadWords = JsonConvert.DeserializeObject<List<string>>(badWords);
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            string resourceName = assembly.GetManifestResourceNames().Single(str => str.EndsWith(BADWORDS_FILE_NAME));
+            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                string result = reader.ReadToEnd();
+                lstBadWords = JsonConvert.DeserializeObject<List<string>>(result);
+            }            
         }
 
         public bool Blacklisted(string sentence)

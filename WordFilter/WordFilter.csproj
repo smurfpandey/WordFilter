@@ -3,6 +3,16 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>WordFilterNS</RootNamespace>
+    <Authors>Neeraj Verma</Authors>
+    <Company>Neeraj Verma</Company>
+    <Product />
+    <Description>A small module meant for use in text generators that lets you filter strings for bad words. .net port of https://github.com/dariusk/wordfilter</Description>
+    <PackageLicenseUrl>https://github.com/smurfpandey/WordFilter/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/smurfpandey/WordFilter</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/smurfpandey/WordFilter</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>word, filter, blacklist</PackageTags>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,13 +22,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <None Remove="badwords.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="badwords.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <EmbeddedResource Include="badwords.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
 
 </Project>
