@@ -1,0 +1,2 @@
+# WordFilter
+A small module meant for use in text generators that lets you filter strings for bad words. .net port of https://github.com/dariusk/wordfilter
